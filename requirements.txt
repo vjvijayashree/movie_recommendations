@@ -104,7 +104,6 @@ python-jsonrpc-server==0.4.0
 python-language-server==0.36.2
 python-slugify==5.0.2
 pytz==2021.1
-pywin32
 pywin32-ctypes==0.2.0
 pywinpty==0.5.7
 PyYAML==5.4.1
@@ -165,4 +164,4 @@ wrapt==1.12.1
 yapf==0.31.0
 yarg==0.1.9
 zipp==3.4.1
-gunicorn
+gunicorn==20.1.0
