@@ -79,8 +79,8 @@
     </div>
   </div>
   {% endfor %}
-  
-  {% if casts|length > 1 %}
+
+  {% if casts|length > 0 %}
   <div class="movie" style="color: #E8E8E8;">
     	<center>
 		<h3>TOP CAST</h3>
@@ -143,9 +143,7 @@
     {% endif %}
   </center>
 
-      {% if movie_cards|length > 1 %}
-
-
+      {% if movie_cards|length > 0 %}
       <div class="movie" style="color: #E8E8E8;">
       <center><h3>RECOMMENDED MOVIES FOR YOU</h3><h5>(Click any of the movies to get recommendation)</h5></center>
     </div>
