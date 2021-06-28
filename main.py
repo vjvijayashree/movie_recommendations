@@ -52,9 +52,9 @@ def rcmd(m):
 #converting list of string to list (eg. "["abc","def"]") to ["abc","def"])
 
 def convert_to_list(my_list):
-    my_list=my_list.split('","')
-    my_list[0]=my_list[0].replace('["','')
-    my_list[-1]=my_list[-1].replace('"]','')
+    my_list = my_list.split('","')
+    my_list[0] = my_list[0].replace('["', '')
+    my_list[-1] = my_list[-1].replace('"]', '')
     return my_list
 
 def get_suggestions():
@@ -83,25 +83,25 @@ def similarity():
 @app.route("/recommend",methods=["POST"])
 def recommend():
     #geting data from AJAX request
-    title=request.form('title')
-    cast_ids=request.form('cast_ids')
-    cast_names=request.form('cast_names')
-    cast_chars=request.form('cast_chars')
-    cast_bdays=request.form('cast_bdays')
-    cast_bios=request.form('cast_bios')
-    cast_places=request.form('cast_places')
-    cast_profiles=request.form('cast_profiles')
-    imdb_id=request.form('imdb_id')
-    poster=request.form('poster')
-    genres=request.form('genres')
-    overview=request.form('overview')
-    vote_average=request.form('vote_average')
-    vote_count=request.form('vote_count')
-    release_date=request.form('release_date')
-    runtime=request.form('runtime')
-    status=request.form('status')
-    rec_movies=request.form('rec_movies')
-    rec_posters=request.form('rec_posters')
+    title=request.form['title']
+    cast_ids=request.form['cast_ids']
+    cast_names=request.form['cast_names']
+    cast_chars=request.form['cast_chars']
+    cast_bdays=request.form['cast_bdays']
+    cast_bios=request.form['cast_bios']
+    cast_places=request.form['cast_places']
+    cast_profiles=request.form['cast_profiles']
+    imdb_id=request.form['imdb_id']
+    poster=request.form['poster']
+    genres=request.form['genres']
+    overview=request.form['overview']
+    vote_average=request.form['rating']
+    vote_count=request.form['vote_count']
+    release_date=request.form['release_date']
+    runtime=request.form['runtime']
+    status=request.form['status']
+    rec_movies=request.form['rec_movies']
+    rec_posters=request.form['rec_posters']
     
     #get movies suggestion for auto_complete
     suggestions=get_suggestions()
@@ -126,11 +126,12 @@ def recommend():
         cast_bios[i]=cast_bios[i].replace(r'\n','\n').replace(r'\"','\"')
     
     #combining mulitiple lists as a dictionary which can be passed to html file so that it can be processed easily and the order of information will be preserved     
-    movie_cards={rec_posters[i]:rec_movies[i] for i in range(len(rec_posters))}
-    
-    casts={cast_names[i]:[cast_ids[i],cast_chars[i],cast_profiles[i]] for i in range(len(cast_profiles))}
-    
-    cast_details={cast_names[i]:[cast_ids[i],cast_profiles[i],cast_bdays[i],cast_places[i],cast_bios[i]] for i in range(len(cast_places))}
+    movie_cards = {rec_posters[i]: rec_movies[i] for i in range(len(rec_posters))}
+
+    casts = {cast_names[i]: [cast_ids[i], cast_chars[i], cast_profiles[i]] for i in range(len(cast_ids))}
+
+    cast_details = {cast_names[i]: [cast_ids[i], cast_profiles[i], cast_bdays[i], cast_places[i], cast_bios[i]] for i in
+                    range(len(cast_ids))}
     
     #web scrapping to get user reviews from IMDB site
     sauce=urllib.request.urlopen('https://www.imdb.com/title/{}/reviews?ref_=tt_ov_rt'.format(imdb_id)).read()
